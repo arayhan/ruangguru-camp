@@ -1,6 +1,6 @@
 // Mengembalikan pola * yang menurun di setiap barisnya
 //
-// contoh: 
+// contoh:
 // baris = 5
 // hasil:
 // *****
@@ -13,3 +13,10 @@
 const n = parseInt(prompt("Masukan jumlah baris: "));
 
 // TODO: answer here
+for (let i = n; i > 0; i--) {
+	let hasil = "";
+	for (let j = 0; j < i; j++) {
+		hasil += "*";
+	}
+	console.log(hasil);
+}
