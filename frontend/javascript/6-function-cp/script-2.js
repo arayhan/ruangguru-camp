@@ -1,6 +1,6 @@
 // Mengembalikan boolean untuk mengecek apakah teks palindrom
 //
-// contoh: 
+// contoh:
 // teks1 = hello
 // teks2 = madam
 // teks3 = kasur ini rusak
@@ -10,11 +10,12 @@
 // teks3 dibalik sama menjadi kasur ini rusak, maka balikan akan true
 
 function checkPalindrome(string) {
-    // TODO: answer here
+	let reverse = string.split("").reverse().join("");
+	return reverse === string;
 }
 
 // masukan teks
-const string = prompt('Enter a string: ');
+const string = prompt("Enter a string: ");
 
 // memanggil fungsi palindrom
 const value = checkPalindrome(string);
