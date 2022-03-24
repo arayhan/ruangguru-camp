@@ -15,9 +15,15 @@ function checkPalindrome(string) {
 }
 
 // masukan teks
-const string = prompt("Enter a string: ");
+// const string = prompt("Enter a string: ");
+const string1 = "hello";
+const string2 = "madam";
+const string3 = "kasur ini rusak";
 
 // memanggil fungsi palindrom
-const value = checkPalindrome(string);
+// const value = checkPalindrome(string);
+// console.log(value);
 
-console.log(value);
+console.log(checkPalindrome(string1));
+console.log(checkPalindrome(string2));
+console.log(checkPalindrome(string3));
