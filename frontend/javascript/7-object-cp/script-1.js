@@ -1,11 +1,12 @@
 // Dari kode di bawah ini
 
 let programming = {
-    languages: ["JavaScript", "Python", "Ruby"],
-    isChallenging: true,
-    isRewarding: true,
-    difficulty: 8,
-    jokes: "http://stackoverflow.com/questions/234075/what-is-your-best-programmer-joke"
+	languages: ["JavaScript", "Python", "Ruby"],
+	isChallenging: true,
+	isRewarding: true,
+	difficulty: 8,
+	jokes:
+		"http://stackoverflow.com/questions/234075/what-is-your-best-programmer-joke",
 };
 
 // buat kode untuk manipulasi data dalam objek berdasarkan instruksi berikut
@@ -18,4 +19,12 @@ let programming = {
 // 6. Menggunakan loop, console.log semua key dalam objek pemrograman.
 // 7. Menggunakan loop, console.log semua value dalam objek pemrograman.
 
-// TODO: answer here
+programming.languages.push("Go");
+programming.difficulty = 7;
+delete programming.jokes;
+programming.isFun = true;
+programming.languages.forEach((language) => console.log(language));
+Object.keys(programming).forEach((key) => console.log(key));
+Object.values(programming).forEach((value) => console.log(value));
+
+console.log(programming);

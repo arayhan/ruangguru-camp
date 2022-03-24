@@ -6,10 +6,16 @@
 // - division() membagi nilai yang disimpan.
 
 let calculator = {
-  // Tulis kode di sini
-  // TODO: answer here
+	read: () => {
+		calculator.value1 = parseInt(prompt("Masukan nilai a: "));
+		calculator.value2 = parseInt(prompt("Masukan nilai b: "));
+	},
+	sum: () => calculator.value1 + calculator.value2,
+	substract: () => calculator.value1 - calculator.value2,
+	multiply: () => calculator.value1 * calculator.value2,
+	division: () => calculator.value1 / calculator.value2,
 };
-  
+
 calculator.read();
 console.log(calculator.sum());
 console.log(calculator.substract());
