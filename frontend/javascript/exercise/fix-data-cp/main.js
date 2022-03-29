@@ -36,11 +36,33 @@
 */
 
 function fixData(line) {
-  // TODO: answer here
+	let vowels = "aiueo";
+	let consonant = "bcdfghjklmnpqrstvwxyz";
+	let virus = "#";
+	let vowelCount = 0;
+	let consonantCount = 0;
+
+	for (let i = 0; i < line.length; i++) {
+		if (vowels.includes(line[i])) {
+			vowelCount++;
+		} else if (consonant.includes(line[i])) {
+			consonantCount++;
+		}
+	}
+
+	if (consonantCount > vowelCount) {
+		return line.replaceAll(virus, "a");
+	} else if (consonantCount < vowelCount) {
+		return line.replaceAll(virus, "b");
+	} else if (consonantCount === vowelCount) {
+		return line.replaceAll(virus, "c");
+	}
+
+	return line;
 }
 
-console.log(fixData('aoi#fdg#ue'))
-console.log(fixData('eh#xyz#oi#'))
-console.log(fixData('#eui#bcl##'))
+console.log(fixData("aoi#fdg#ue"));
+console.log(fixData("eh#xyz#oi#"));
+console.log(fixData("#eui#bcl##"));
 
-module.exports = fixData
+module.exports = fixData;
