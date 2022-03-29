@@ -1,12 +1,12 @@
 function sum(a, b) {
-    return 0; // TODO: replace this
+	return a + b; // TODO: repl1ace this
 }
 
 function multiply(a, b) {
-    return 0; // TODO: replace this
+	return a * b; // TODO: replace this
 }
 
 module.exports = {
-    sum,
-    multiply
-}
+	sum,
+	multiply,
+};
