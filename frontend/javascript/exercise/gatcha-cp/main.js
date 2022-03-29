@@ -13,12 +13,25 @@
 // TODO: answer here
 
 function gatcha(button) {
-  // TODO: answer here
+	switch (button) {
+		case 1:
+			return "coba lagi ya";
+		case 2:
+			return "selamat kamu mendapatkan kupon sebanyak 5";
+		case 3:
+			return "selamat kamu mendapatkan kupon sebanyak 15";
+		case 4:
+			return "selamat kamu mendapatkan kupon sebanyak 50";
+		case 5:
+			return "selamat kamu mendapatkan kupon sebanyak 100";
+		default:
+			return "button is not valid";
+	}
 }
 
 // Create variable button here
-// TODO: answer here
+const button = Math.ceil(Math.random() * 5);
 
-console.log(gatcha(button))
+console.log(gatcha(button));
 
-module.exports = gatcha
+module.exports = gatcha;
