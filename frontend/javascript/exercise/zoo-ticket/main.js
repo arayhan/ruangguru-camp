@@ -12,26 +12,30 @@
  * -Jika umurnya diatas 120 tahun ATAU dia kelahiran dibawah tahun 1900, maka tampilkan 'Invalid Age'
  *
  * Setelah menghitung harga, maka tampilkan NAMA dan HARGA TIKET dari pengunjung tersebut.
- * 
+ *
  *
  */
 
-// TULIS PSEUDOCODE KAMU DIBAWAH INI:
-/*
-STORE "nama" with any value
-STORE "tahun" with any value
-STORE "harga" with 10000
+const basePrice = 10000;
+const currentYear = new Date().getFullYear();
 
-IF "tahun" minus 2020 < 2
-  DISPLAY "'name' gratis"
-ELSE IF "tahun" minus 2020 >= 2 and <= 10
-  DISPLAY "'name' with 'harga'"
-ELSE IF "tahun" minus 2020 >= 11 and <= 18
-  CALCULATE "harga" times 1.5
-  DISPLAY "name" and calculation result 
-ELSE IF "tahun" minus 2020 >= 19
-  CALCULATE "harga" times 2
-  DISPLAY "name" and calculation result
-ELSE IF "tahun" minus 2020 > 120 or "tahun" <= 1900
-  DISLPLAY "Invalid Age"
-*/
+function calculateTicketPrice(name, birthYear) {
+	let resultPrice = 0;
+	const currentAge = currentYear - birthYear;
+
+	if (currentAge < 2) {
+		resultPrice = 0;
+	} else if (currentAge >= 2 && currentAge <= 10) {
+		resultPrice = basePrice;
+	} else if (currentAge >= 11 && currentAge <= 18) {
+		resultPrice = basePrice * 1.5;
+	} else if (currentAge >= 19 && currentAge <= 120) {
+		resultPrice = basePrice * 2;
+	} else {
+		resultPrice = "Invalid Age";
+	}
+
+	return `${name} your ticket price is ${resultPrice}`;
+}
+
+console.log(calculateTicketPrice("Rayhan", 1999));
