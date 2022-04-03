@@ -1,5 +1,5 @@
 // Diberikan matriks n x n 2D yang ada di bawah, putar matriks 90 derajat (searah jarum jam).
-// Kita harus memutar matriks tersebut, yang berarti harus mengubah input matriks 2D secara langsung. 
+// Kita harus memutar matriks tersebut, yang berarti harus mengubah input matriks 2D secara langsung.
 // Jangan mengalokasikan matriks 2D lain dan melakukan rotasi, dan matriks harus berbentuk array 2 dimensi.
 //
 // Contoh 1
@@ -21,11 +21,23 @@
 // Input: matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]
 // Output: [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]
 
-
 function rotation(matrix) {
-    // TODO: answer here
-};
+	if (!matrix || !matrix.length) return "invalid data";
+	for (let i = 0; i < matrix.length; i++) {
+		for (let j = 0; j < matrix.length; j++) {
+			matrix[i][j] = matrix[j][i];
+		}
+	}
 
-// TODO: answer here
+	return matrix;
+}
 
-module.exports = rotation
+console.log(
+	rotation([
+		[1, 2, 3],
+		[4, 5, 6],
+		[7, 8, 9],
+	])
+);
+
+module.exports = rotation;
