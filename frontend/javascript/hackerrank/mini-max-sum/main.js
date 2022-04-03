@@ -13,6 +13,8 @@
 function miniMaxSum(arr) {
 	if (!arr || !arr.length) return "invalid data";
 
+	arr.sort((a, b) => a - b);
+
 	let min = 0;
 	let max = 0;
 
