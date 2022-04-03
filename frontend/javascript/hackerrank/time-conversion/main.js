@@ -13,15 +13,21 @@
 
 function timeConversion(s) {
 	// Write your code here
+	if (!s) {
+		return "";
+	}
+
 	let time = s.split(":");
 	let hour = parseInt(time[0]);
 	let minutes = time[1];
-	let seconds = time[2];
-	let ampm = time[3];
+	let seconds = time[2].slice(0, 2);
+	let ampm = time[2].slice(2);
 
 	if (ampm === "AM") {
 		if (hour === 12) {
 			hour = "00";
+		} else if (hour < 10) {
+			hour = `0${hour}`;
 		}
 	} else {
 		if (hour !== 12) {
@@ -34,7 +40,9 @@ function timeConversion(s) {
 
 function main() {
 	//var s = readLine();
-	var s = "07:05:45PM"; // override input
+	// var s = "07:05:45PM"; // override input
+	// var s = "12:20:50AM"; // override input
+	var s = "06:40:03AM"; // override input
 	var result = timeConversion(s);
 	console.log(result);
 }
