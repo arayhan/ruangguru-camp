@@ -2,26 +2,42 @@
 Uncomment variable dibawah ini untuk mulai mengerjakan. dilarang mengganti nama variable yang dibuat.
 */
 
-// let stopwatch = mendapatkan value dari stopwatch
-// let startbtn = tombol untuk memulai stapwatch
-// let stopbtn = tombol untuk memberhentikan stopwatch
-// let resetbtn = tombol untuk mereset value dari stopwatch
+let stopwatch = document.getElementById("stopwatch");
+let startbtn = document.getElementById("start");
+let stopbtn = document.getElementById("stop");
+let resetbtn = document.getElementById("reset");
 
-// TODO: answer here
-
+let startTime = stopwatch.innerHTML.split(":");
+let minute = startTime[0];
+let second = startTime[1];
+let millisecond = startTime[2];
+let interval;
 
 function start() {
-  // TODO: answer here
+	millisecond++;
+	startbtn.disabled = true;
+	stopwatch.innerHTML = `${minute}:${second}:${millisecond}`;
 }
 
 function stop() {
-  // TODO: answer here
+	clearInterval(interval);
+	startbtn.disabled = false;
+	console.log(interval);
 }
 
 function reset() {
-  // TODO: answer here
+	clearInterval(interval);
+	startbtn.disabled = false;
+	minute = "00";
+	second = "00";
+	millisecond = "00";
+	stopwatch.innerHTML = `${minute}:${second}:${millisecond}`;
 }
 
 function runTime() {
-  // TODO: answer here
+	interval = setInterval(() => start(), 100);
 }
+
+startbtn.addEventListener("click", () => runTime());
+stopbtn.addEventListener("click", () => stop());
+resetbtn.addEventListener("click", () => reset());
