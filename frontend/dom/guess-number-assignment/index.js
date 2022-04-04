@@ -2,30 +2,76 @@
 Uncomment variable dibawah ini untuk mulai mengerjakan. dilarang mengganti nama variable yang dibuat.
 */
 
-// let newGameBtn = tombol untuk melakukan restart game
-// let randomNumber = generate random number dari 1 sampai 10
-// let message = element untuk menampilkan pesan
-// let displayScore = element untuk menampilkan score
-// let input = element untuk memasukan data
-// let checkBtn = tombol untuk melakuan pengecekan angka pada input
-// let score = nilai yang akan ditampilakan
+const MAX_NUMBER = 10;
+const MIN_NUMBER = 1;
 
-// TODO: answer here
+function generateRandomNumber() {
+	return Math.floor(Math.random() * MAX_NUMBER) + 1;
+}
 
+let newGameBtn = document.getElementById("newGameBtn");
+let randomNumber = generateRandomNumber();
+let message = document.getElementById("message");
+let displayScore = document.getElementById("score");
+let input = document.getElementById("input");
+let checkBtn = document.getElementById("checkBtn");
+let score = Number(displayScore.innerHTML);
 
-function displayMessage(msg) {
-  // TODO: answer here
+function displayMessage(messageText) {
+	message.innerHTML = messageText;
 }
 
 function resetGame() {
-  // TODO: answer here
-  //dilarang menghapus code dibawah ini!
-  document.getElementById('hidden-number').innerHTML = randomNumber
+	randomNumber = generateRandomNumber();
+
+	displayMessage("Lets start guessing...");
+	displayScore.innerHTML = 10;
+	input.value = "";
+
+	document.getElementById("hidden-number").innerHTML = randomNumber;
 }
 
 function checkNumber() {
-  // TODO: answer here
+	let inputValue = parseInt(input.value);
+
+	console.log({ randomNumber, inputValue });
+
+	if (score > MIN_NUMBER) {
+		if (isNaN(inputValue)) {
+			displayMessage("Please enter a number!");
+		} else if (inputValue > MAX_NUMBER || inputValue < MIN_NUMBER) {
+			displayMessage("Guess any number between 1 and 10");
+		} else if (inputValue === randomNumber) {
+			displayMessage("Yeay! you guessed it!");
+			score += 1;
+			displayScore.innerHTML = score;
+			randomNumber = generateRandomNumber();
+		} else if (inputValue > randomNumber || inputValue < randomNumber) {
+			score -= 1;
+			displayScore.innerHTML = score;
+
+			if (score === 0) {
+				displayMessage("Oops, you lost the game");
+			} else {
+				displayMessage(
+					input > randomNumber ? "Oww... that's too big!" : "Too small, buddy!"
+				);
+			}
+		}
+	}
 }
 
+window.addEventListener("load", function () {
+	generateRandomNumber();
+});
+
+newGameBtn.addEventListener("click", function () {
+	resetGame();
+});
+
+checkBtn.addEventListener("click", function () {
+	checkNumber();
+});
+
 //dilarang menghapus code dibawah ini!
-document.getElementById('hidden-number').innerHTML = randomNumber
+document.getElementById("hidden-number").innerHTML = randomNumber;
