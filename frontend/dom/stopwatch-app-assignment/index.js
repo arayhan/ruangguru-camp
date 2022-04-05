@@ -14,9 +14,28 @@ let millisecond = startTime[2];
 let interval;
 
 function start() {
+	minute = parseInt(minute);
+	second = parseInt(second);
+	millisecond = parseInt(millisecond);
+
 	millisecond++;
+
+	if (millisecond >= 100) {
+		second++;
+		millisecond = 0;
+	}
+
+	if (second >= 60) {
+		minute++;
+		second = 0;
+	}
+
+	let minuteText = minute < 10 ? `0${minute}` : minute;
+	let secondText = second < 10 ? `0${second}` : second;
+	let millisecondText = millisecond < 10 ? `0${millisecond}` : millisecond;
+
 	startbtn.disabled = true;
-	stopwatch.innerHTML = `${minute}:${second}:${millisecond}`;
+	stopwatch.innerHTML = `${minuteText}:${secondText}:${millisecondText}`;
 }
 
 function stop() {
@@ -35,7 +54,7 @@ function reset() {
 }
 
 function runTime() {
-	interval = setInterval(() => start(), 100);
+	interval = setInterval(() => start(), 10);
 }
 
 startbtn.addEventListener("click", () => runTime());
