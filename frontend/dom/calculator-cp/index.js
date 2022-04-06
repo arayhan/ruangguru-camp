@@ -7,7 +7,6 @@ function number(number) {
 
 //handle when the Del button, AC button and other operators (+, /, -, x) are pressed. It renders the operator into #input element
 function operator(operator) {
-	console.log({ operator });
 	switch (operator) {
 		case "Del":
 			inputEl.value = inputEl.value.slice(0, -1);

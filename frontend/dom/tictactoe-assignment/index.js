@@ -91,32 +91,57 @@ function checkWinner() {
 }
 
 function checkNoWinner() {
-	let buttons = document.querySelector("#board").querySelectorAll("button");
-	let allFilled = true;
+	// let buttons = document.querySelector("#board").querySelectorAll("button");
+	// let allFilled = true;
 
-	for (let i = 0; i < buttons.length; i++) {
-		if (buttons[i].textContent === "") {
-			allFilled = false;
-			break;
+	// for (let i = 0; i < buttons.length; i++) {
+	// 	if (buttons[i].textContent === "") {
+	// 		allFilled = false;
+	// 		break;
+	// 	}
+	// }
+
+	// if (allFilled) {
+	// 	alert("No winner!");
+	// 	generate();
+	// }
+	let getValue = (y, x) => document.getElementById(y + "-" + x).textContent;
+	for (let i = 0; i < SIZE; i++) {
+		for (let j = 0; j < SIZE; j++) {
+			if (getValue(i, j) == "") {
+				return false;
+			}
 		}
 	}
-
-	if (allFilled) {
-		alert("No winner!");
-		generate();
-	}
+	return true;
 }
 
 //handle click event, don't forget to disable the button so that it can't be clicked again
 function click(event) {
-	let button = event.target;
-	button.disabled = true;
-	button.textContent = turn;
+	// let button = event.target;
+	// button.disabled = true;
+	// button.textContent = turn;
+
+	// checkWinner();
+	// checkNoWinner();
+
+	// turn = turn === "X" ? "O" : "X";
+	this.disabled = true;
+	this.textContent = turn;
+
+	if (turn == "X") {
+		turn = "O";
+		this.style.backgroundColor = "red";
+	} else {
+		turn = "X";
+		this.style.backgroundColor = "blue";
+	}
 
 	checkWinner();
-	checkNoWinner();
-
-	turn = turn === "X" ? "O" : "X";
+	if (checkNoWinner()) {
+		//the board is full but no winner, it's a tie
+		generate();
+	}
 }
 
 //generate the tictactoe board. It is just a 3x3 table with <button/> inside <td/>
