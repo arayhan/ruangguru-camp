@@ -113,21 +113,16 @@ function checkNoWinner() {
 			}
 		}
 	}
+
+	alert("No winner!");
 	return true;
 }
 
 //handle click event, don't forget to disable the button so that it can't be clicked again
 function click(event) {
-	// let button = event.target;
-	// button.disabled = true;
-	// button.textContent = turn;
-
-	// checkWinner();
-	// checkNoWinner();
-
-	// turn = turn === "X" ? "O" : "X";
 	this.disabled = true;
 	this.textContent = turn;
+	this.style.color = "white";
 
 	if (turn == "X") {
 		turn = "O";
