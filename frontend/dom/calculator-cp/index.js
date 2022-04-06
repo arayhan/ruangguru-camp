@@ -7,30 +7,38 @@ function number(number) {
 
 //handle when the Del button, AC button and other operators (+, /, -, x) are pressed. It renders the operator into #input element
 function operator(operator) {
-	switch (operator) {
-		case "Del":
-			inputEl.value = inputEl.value.slice(0, -1);
-			break;
-		case "AC":
-			inputEl.value = "";
-			break;
-		case "+":
-			inputEl.value += "+";
-			break;
-		case "-":
-			inputEl.value += "-";
-			break;
-		case "*":
-			inputEl.value += "*";
-			break;
-		case "/":
-			inputEl.value += "/";
-			break;
-		case ".":
-			inputEl.value += ".";
-			break;
-		default:
-			break;
+	const lastInput = inputEl.value.slice(-1);
+
+	if (operator === "Del") {
+		inputEl.value = inputEl.value.slice(0, -1);
+	} else if (operator === "AC") {
+		inputEl.value = "";
+	} else if (
+		lastInput !== "+" &&
+		lastInput !== "-" &&
+		lastInput !== "*" &&
+		lastInput !== "/" &&
+		lastInput !== "."
+	) {
+		switch (operator) {
+			case "+":
+				inputEl.value += "+";
+				break;
+			case "-":
+				inputEl.value += "-";
+				break;
+			case "*":
+				inputEl.value += "*";
+				break;
+			case "/":
+				inputEl.value += "/";
+				break;
+			case ".":
+				inputEl.value += ".";
+				break;
+			default:
+				break;
+		}
 	}
 }
 
