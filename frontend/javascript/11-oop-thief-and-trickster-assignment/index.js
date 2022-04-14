@@ -19,17 +19,7 @@ class Thief extends Player {
 			player.setGold(player.getGold() - 5);
 			this.setGold(this.getGold() + 5);
 
-			if (player.getDistractionPurseChance() > this.randomizer()) {
-				if (this.getGold() < 10) {
-					player.setGold(player.getGold() + this.getGold());
-					this.setGold(0);
-					return "Berhasil mencuri balik semua uang lawan";
-				}
-
-				player.setGold(player.getGold() + 10);
-				this.setGold(this.getGold() - 10);
-				return "Berhasil mencuri balik 10 gold";
-			}
+			return player.distractionPurse(this);
 		}
 	}
 }
@@ -51,10 +41,22 @@ class Trickster extends Player {
 
 	distractionPurse(player) {
 		const rng = this.randomizer();
+
+		if (this.getDistractionPurseChance() > rng) {
+			if (player.getGold() < 10) {
+				this.setGold(this.getGold() + player.getGold());
+				player.setGold(0);
+				return "Berhasil mencuri balik semua uang lawan";
+			}
+
+			this.setGold(this.getGold() + 10);
+			player.setGold(player.getGold() - 10);
+			return "Berhasil mencuri balik 10 gold";
+		}
 	}
 
 	steal(player) {
-		// TODO: answer here
+		super.steal(player);
 	}
 }
 
