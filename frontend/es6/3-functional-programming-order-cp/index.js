@@ -8,8 +8,8 @@
  */
 
 function customisableGreeting(user, formatCallback) {
-  // TODO: answer here
-  return `Hi name is ${formattedName}, how are you?`;
+	const formattedName = formatCallback(user);
+	return `Hi name is ${formattedName}, how are you?`;
 }
 
-module.exports = customisableGreeting
+module.exports = customisableGreeting;
