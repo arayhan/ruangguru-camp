@@ -15,7 +15,14 @@
  */
 
 const findAnimal = (bush) => {
-  // TODO: answer here
+	return bush
+		.split("")
+		.filter(function (item) {
+			return item === item.toLowerCase();
+		})
+		.join("");
 };
 
-module.exports = findAnimal
+findAnimal("UkUNFYGaFYFYmNUHbJKHJJiOKDJKDnKFKFLgLLF");
+
+module.exports = findAnimal;
