@@ -8,7 +8,11 @@
  * Dilarang menggunakan Math.max
  */
 const max = (...args) => {
-  // TODO: answer here
+	const max = args.reduce((acc, curr) => {
+		return acc > curr ? acc : curr;
+	});
+
+	return max;
 };
 
-module.exports = max
+module.exports = max;
