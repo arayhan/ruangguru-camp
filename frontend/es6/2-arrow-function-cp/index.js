@@ -14,7 +14,7 @@
  *
  */
 
-const multipleByTwo = (n) => {
+const multiplyByTwo = (n) => {
 	return n * 2;
 };
 
