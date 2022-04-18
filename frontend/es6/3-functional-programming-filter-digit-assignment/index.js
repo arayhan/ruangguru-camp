@@ -10,7 +10,9 @@
  */
 
 const filterDigit = (array, digit) => {
-  // TODO: answer here
+	return array.filter((value) => {
+		return value.toString().length === digit;
+	});
 };
 
-module.exports = filterDigit
+module.exports = filterDigit;
