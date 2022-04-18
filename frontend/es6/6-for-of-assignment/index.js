@@ -12,7 +12,29 @@
  */
 
 const checkOmnipresent = (array, valueToFind) => {
-  // TODO: answer here
+	for (subarray of array) {
+		console.log(subarray.includes(valueToFind));
+		if (!subarray.includes(valueToFind)) return false;
+	}
+
+	return true;
 };
 
-module.exports = checkOmnipresent
+checkOmnipresent(
+	[
+		[1, 2, 3],
+		[5, 4, 1],
+		[4, 14, 1],
+	],
+	1
+);
+checkOmnipresent(
+	[
+		[1, 2, 3],
+		[5, 4, 1],
+		[4, 14, 1],
+	],
+	2
+);
+
+module.exports = checkOmnipresent;
