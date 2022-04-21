@@ -1,16 +1,22 @@
-const Song = require('./song')
-const Playlist = require('./playlist')
+const Song = require("./song");
+const Playlist = require("./playlist");
 
 module.exports = class MusicPlayer {
-    constructor(playlist) {
-        this.playlist = playlist
-    }
+	constructor(playlist) {
+		this.playlist = playlist;
+	}
 
-    addSong(song) {
-        // TODO: answer here
-    }
+	addSong(song) {
+		this.playlist.songs.push(song);
+	}
 
-    play() {
-        // TODO: answer here
-    }
-}
+	play() {
+		if (this.playlist.isEmpty()) return "";
+
+		const song = this.playlist.songs.shift();
+
+		if (this.playlist.isRepeatable) this.playlist.songs.push(song);
+
+		return `Now Playing ${song.singer} - ${song.title}`;
+	}
+};
