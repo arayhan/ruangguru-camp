@@ -17,7 +17,19 @@
 // Explanation: Jika ditata, "apple" dan "paddle" memiliki huruf-huruf yang berbeda
 
 function anagramChecker(str1, str2) {
-    return true; // TODO: replace this
+	if (str1.length !== str2.length) {
+		return false;
+	}
+	let str1Char = str1.split("");
+	let str2Char = str2.split("");
+	str1Char.sort();
+	str2Char.sort();
+	for (let i = 0; i < str1Char.length; i++) {
+		if (str1Char[i] !== str2Char[i]) {
+			return false;
+		}
+	}
+	return true;
 }
 
 console.log(anagramChecker("keen", "knee"));
@@ -25,5 +37,5 @@ console.log(anagramChecker("kee", "knn"));
 console.log(anagramChecker("fried", "fired"));
 
 module.exports = {
-    anagramChecker
-}
+	anagramChecker,
+};
