@@ -10,32 +10,34 @@
 const https = require("https");
 
 function requestStarWarsPeopleById(peopleId, onReturn, onError) {
-  https
-    .get("https://swapi.dev/api/people/" + peopleId, (res) => {
-      let result = "";
+	https
+		.get("https://swapi.dev/api/people/" + peopleId, (res) => {
+			let result = "";
 
-      if (res.statusCode !== 200) {
-        onError(new Error(res.statusCode));
-      }
+			if (res.statusCode !== 200) {
+				onError(new Error(res.statusCode));
+			}
 
-      res.on("data", (d) => {
-        result += d;
-      });
+			res.on("data", (d) => {
+				result += d;
+			});
 
-      res.on("end", () => {
-        onReturn(JSON.parse(result));
-      });
-    })
-    .on("error", (e) => {
-      onError(e);
-    });
+			res.on("end", () => {
+				onReturn(JSON.parse(result));
+			});
+		})
+		.on("error", (e) => {
+			onError(e);
+		});
 }
 
 function promiseStarWarsPeopleById(peopleId) {
-  // TODO: answer here
+	return new Promise((resolve, rejects) => {
+		requestStarWarsPeopleById(peopleId, resolve, rejects);
+	});
 }
 
 module.exports = {
-  promiseStarWarsPeopleById,
-  requestStarWarsPeopleById,
+	promiseStarWarsPeopleById,
+	requestStarWarsPeopleById,
 };
