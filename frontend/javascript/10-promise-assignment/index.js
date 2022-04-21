@@ -38,31 +38,43 @@ const https = require("https"); // Dibutuhkan sebagai protokol untuk akses data.
  */
 
 function promiseStarWarsData(url) {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (res) => {
-        let result = "";
+	return new Promise((resolve, reject) => {
+		https
+			.get(url, (res) => {
+				let result = "";
 
-        if (res.statusCode !== 200) {
-          reject(new Error(res.statusCode));
-        }
+				if (res.statusCode !== 200) {
+					reject(new Error(res.statusCode));
+				}
 
-        res.on("data", (d) => {
-          result += d;
-        });
+				res.on("data", (d) => {
+					result += d;
+				});
 
-        res.on("end", () => {
-          resolve(JSON.parse(result));
-        });
-      })
-      .on("error", (e) => {
-        reject(e);
-      });
-  });
+				res.on("end", () => {
+					resolve(JSON.parse(result));
+				});
+			})
+			.on("error", (e) => {
+				reject(e);
+			});
+	});
 }
 
 function getDataPeopleByIdWithFilms(peopleId) {
-  // TODO: answer here
+	const urlPeople = `https://swapi.dev/api/people/${peopleId}/`;
+
+	return Promise.resolve(
+		promiseStarWarsData(urlPeople).then((people) => {
+			const films = people.films.map((filmUrl) => {
+				return promiseStarWarsData(filmUrl);
+			});
+
+			return Promise.all(films).then((films) => {
+				return { ...people, films };
+			});
+		})
+	);
 }
 
 module.exports = { getDataPeopleByIdWithFilms };
