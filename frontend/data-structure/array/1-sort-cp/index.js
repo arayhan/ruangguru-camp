@@ -13,17 +13,34 @@
 // [1,2,3,4,5] -> [2,3,4,5,1] -> [3,4,5,1,2] -> [4,5,1,2,3] -> [5,1,2,3,4]
 
 function sort(arr) {
-    return arr // TODO: replace this
+	for (let i = 0; i < arr.length; i++) {
+		for (let j = 0; j < arr.length - i - 1; j++) {
+			if (arr[j + 1] < arr[j]) {
+				[arr[j + 1], arr[j]] = [arr[j], arr[j + 1]];
+			}
+		}
+	}
+
+	return arr;
 }
 
 function rotateLeft(d, arr) {
-    return arr // TODO: replace this
+	if (arr.length) {
+		while (true) {
+			const firstIndex = arr.shift();
+			arr.push(firstIndex);
+
+			if (arr[arr.length - 1] === d) return arr;
+		}
+	}
+
+	return arr;
 }
 
-let nums = [4, 5, 2, 1, 3]
-let sorted = sort(nums)
-console.log(sorted)
-rotated = rotateLeft(4, sorted)
-console.log(rotated)
+let nums = [4, 5, 2, 1, 3];
+let sorted = sort(nums);
+console.log(sorted);
+rotated = rotateLeft(4, sorted);
+console.log(rotated);
 
-module.exports = { sort, rotateLeft }
+module.exports = { sort, rotateLeft };
