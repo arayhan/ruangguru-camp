@@ -1,21 +1,26 @@
 module.exports = class TextEditor {
-    constructor() {
-        // TODO: answer here
-    }
+	constructor() {
+		this.undoStack = [];
+		this.redoStack = [];
+	}
 
-    write(c) {
-        // TODO: answer here
-    }
+	write(c) {
+		if (this.undoStack.length === this.size) throw "TextEditor is full";
+		else {
+			this.undoStack.push(c);
+			this.top++;
+		}
+	}
 
-    read() {
-        // TODO: answer here
-    }
+	read() {
+		return this.undoStack.join("");
+	}
 
-    undo() {
-        // TODO: answer here
-    }
-    
-    redo() {
-        // TODO: answer here
-    }
-}
+	undo() {
+		if (this.undoStack.length) this.redoStack.push(this.undoStack.pop());
+	}
+
+	redo() {
+		if (this.redoStack.length) this.undoStack.push(this.redoStack.pop());
+	}
+};
