@@ -20,7 +20,8 @@ export function RandomQuote() {
 
 	return (
 		<div className="wrapper">
-			<h1 className="emoji" data-testid="emoji">
+			<h1>Random Quote</h1>
+			<h1 className="quote" data-testid="quote">
 				{loading ? "Loading..." : quote.content}
 			</h1>
 			<button
