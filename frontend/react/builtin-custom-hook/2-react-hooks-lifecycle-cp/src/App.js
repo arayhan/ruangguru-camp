@@ -1,22 +1,35 @@
 import React from "react";
 
 export default function App() {
-  return <RandomQuote />;
+	return <RandomQuote />;
 }
 
 export function RandomQuote() {
-  // TODO: answer here
-  React.useEffect(() => {
-    // TODO: answer here
-  }, []);
+	const [quote, setQuote] = React.useState({});
+	const [loading, setLoading] = React.useState(true);
 
-  function getQuote() {
-    setLoading(true);
-    fetch("https://api.quotable.io/random")
-      .then((res) => res.json())
-      .then((data) => setQuote(data))
-      .finally(() => setLoading(false));
-  }
+	function getQuote() {
+		setLoading(true);
+		fetch("https://api.quotable.io/random")
+			.then((res) => res.json())
+			.then((data) => setQuote(data))
+			.finally(() => setLoading(false));
+	}
 
-  // TODO: answer here
+	React.useEffect(() => getQuote(), []);
+
+	return (
+		<div className="wrapper">
+			<h1 className="emoji" data-testid="emoji">
+				{loading ? "Loading..." : quote.content}
+			</h1>
+			<button
+				onClick={() => getQuote()}
+				className="button"
+				data-testid="button"
+			>
+				Get another quote
+			</button>
+		</div>
+	);
 }
