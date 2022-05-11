@@ -19,6 +19,6 @@
     "jest": "^27.5.1"
   },
   "dependencies": {
-    "prompt": "^1.2.2"
+    "axios": "^0.27.1"
   }
 }
