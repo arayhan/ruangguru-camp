@@ -9,9 +9,8 @@ function PostList() {
 
   useEffect(() => {
     const getPosts = async () => {
-      const res = await axios.get(`${API_URL}/post/list`, {
-        withCredentials: true,
-      });
+      const config = { withCredentials: true };
+      const res = await axios.get(`${API_URL}/post/list`, config);
 
       setPosts(res.data.data);
     };
