@@ -1,9 +1,9 @@
-import { useEffect, useContext, useCallback } from "react";
-import { FiLogIn } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { getSession, auth } from "../api/auth";
-import { SessionContext } from "../context/SessionContext";
-import Logo from "../images/instagram-logo.png";
+import { useEffect, useContext, useCallback } from 'react';
+import { FiLogIn } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { getSession, auth } from '../api/auth';
+import { SessionContext } from '../context/SessionContext';
+import Logo from '../images/instagram-logo.png';
 
 export default function Navbar() {
   const { session, setSession } = useContext(SessionContext);
@@ -16,8 +16,8 @@ export default function Navbar() {
   }, [setSession]);
 
   useEffect(() => {
-    handleGetSession();
-  }, [handleGetSession]);
+    if (!session) handleGetSession();
+  }, [session, handleGetSession]);
 
   return (
     <div className="shadow-md bg-white" aria-label="Navbar">
@@ -26,17 +26,9 @@ export default function Navbar() {
           <div className="py-5">
             <Link className="inline-flex items-center space-x-3" to="/">
               <div>
-                <img
-                  className="w-6"
-                  src={Logo}
-                  alt="Instagram Logo"
-                  aria-label="App Logo"
-                />
+                <img className="w-6" src={Logo} alt="Instagram Logo" aria-label="App Logo" />
               </div>
-              <div
-                className="font-logo text-xl font-semibold"
-                aria-label="App Title"
-              >
+              <div className="font-logo text-xl font-semibold" aria-label="App Title">
                 Instagram Clone
               </div>
             </Link>
@@ -45,11 +37,7 @@ export default function Navbar() {
           <div>
             {session && (
               <div className="flex items-center space-x-3" aria-label="Profile">
-                <img
-                  className="w-10 rounded-full"
-                  src={session.user.image}
-                  alt="User Profile"
-                />
+                <img className="w-10 rounded-full" src={session.user.image} alt="User Profile" />
                 <div>
                   <div>{session.user.name}</div>
                   <div className="text-xs">{session.user.email}</div>
