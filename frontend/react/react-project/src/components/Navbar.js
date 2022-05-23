@@ -6,24 +6,21 @@ import { SessionContext } from "../context/SessionContext";
 import Logo from "../images/instagram-logo.png";
 
 export default function Navbar() {
-  const context = useContext(SessionContext);
+  const { setSession } = useContext(SessionContext);
 
-  const [session, setSession] = useState(null);
+  const [profile, setProfile] = useState(null);
 
   const handleLogin = () => auth();
 
   useEffect(() => {
     const handleGetSession = async () => {
       const session = await getSession();
+      setProfile(session.data);
       setSession(session.data);
     };
 
     handleGetSession();
   }, []);
-
-  useEffect(() => {
-    console.log({ session });
-  }, [session]);
 
   return (
     <div className="shadow-md bg-white" aria-label="Navbar">
@@ -49,13 +46,13 @@ export default function Navbar() {
           </div>
 
           <div>
-            {session && (
+            {profile && (
               <div aria-label="Profile">
                 Welcome,{" "}
-                <span className="font-semibold">{session.user.name}</span>!
+                <span className="font-semibold">{profile.user.name}</span>!
               </div>
             )}
-            {!session && (
+            {!profile && (
               <button
                 className="flex items-center space-x-2 bg-primary rounded-md px-6 py-3 text-white transition hover:bg-primary-600"
                 onClick={handleLogin}

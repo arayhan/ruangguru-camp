@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import CardImage from "./components/PostCard";
+import { SessionProvider } from "./context/SessionContext";
 
 function App() {
   const random =
@@ -7,10 +8,12 @@ function App() {
 
   return (
     <div aria-label="App">
-      <Navbar />
-      <div className="container">
-        <CardImage image={random} caption={random} />
-      </div>
+      <SessionProvider>
+        <Navbar />
+        <div className="container">
+          <CardImage image={random} caption={random} />
+        </div>
+      </SessionProvider>
     </div>
   );
 }
