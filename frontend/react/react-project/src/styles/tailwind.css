@@ -11,7 +11,4 @@
 	body {
 		@apply font-primary;
 	}
-	button {
-		@apply outline-none focus:outline-none;
-	}
 }
