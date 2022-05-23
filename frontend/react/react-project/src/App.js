@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import CardImage from "./components/PostCard";
+import UploadForm from "./components/UploadForm";
 import { SessionProvider } from "./context/SessionContext";
 
 function App() {
@@ -10,9 +11,12 @@ function App() {
     <div aria-label="App">
       <SessionProvider>
         <Navbar />
+
         <div className="container">
           <CardImage image={random} caption={random} />
         </div>
+
+        <UploadForm />
       </SessionProvider>
     </div>
   );
