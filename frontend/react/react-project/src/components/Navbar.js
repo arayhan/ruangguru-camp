@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext, useCallback } from "react";
 import { FiLogIn } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { getSession, auth } from "../api/auth";
@@ -6,21 +6,18 @@ import { SessionContext } from "../context/SessionContext";
 import Logo from "../images/instagram-logo.png";
 
 export default function Navbar() {
-  const { setSession } = useContext(SessionContext);
-
-  const [profile, setProfile] = useState(null);
+  const { session, setSession } = useContext(SessionContext);
 
   const handleLogin = () => auth();
 
-  useEffect(() => {
-    const handleGetSession = async () => {
-      const session = await getSession();
-      setProfile(session.data);
-      setSession(session.data);
-    };
+  const handleGetSession = useCallback(async () => {
+    const session = await getSession();
+    setSession(session.data);
+  }, [setSession]);
 
+  useEffect(() => {
     handleGetSession();
-  }, []);
+  }, [handleGetSession]);
 
   return (
     <div className="shadow-md bg-white" aria-label="Navbar">
@@ -46,13 +43,20 @@ export default function Navbar() {
           </div>
 
           <div>
-            {profile && (
-              <div aria-label="Profile">
-                Welcome,{" "}
-                <span className="font-semibold">{profile.user.name}</span>!
+            {session && (
+              <div className="flex items-center space-x-3" aria-label="Profile">
+                <img
+                  className="w-10 rounded-full"
+                  src={session.user.image}
+                  alt="User Profile"
+                />
+                <div>
+                  <div>{session.user.name}</div>
+                  <div className="text-xs">{session.user.email}</div>
+                </div>
               </div>
             )}
-            {!profile && (
+            {!session && (
               <button
                 className="flex items-center space-x-2 bg-primary rounded-md px-6 py-3 text-white transition hover:bg-primary-600"
                 onClick={handleLogin}
