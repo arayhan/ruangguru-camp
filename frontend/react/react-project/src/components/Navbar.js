@@ -12,20 +12,20 @@ export default function Navbar() {
       <div className="container">
         <div className="py-5">
           <Link className="inline-flex items-center space-x-3" to="/">
-            <span>
+            <div>
               <img
                 className="w-6"
                 src={Logo}
                 alt="Instagram Logo"
                 aria-label="App Logo"
               />
-            </span>
-            <span
+            </div>
+            <div
               className="font-logo text-xl font-semibold"
               aria-label="App Title"
             >
               Instagram Clone
-            </span>
+            </div>
           </Link>
         </div>
       </div>
