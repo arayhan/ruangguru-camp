@@ -23,7 +23,7 @@ export default function LikeDislikeButton({
           className={`flex items-center space-x-2 border border-primary px-5 py-2 rounded-md ${
             isLiked ? likeActiveClass : likeInactiveClass
           }`}
-          onClick={() => onClickButton(LikeDislikeButton.TYPES.LIKE)}
+          onClick={() => onClickButton(id, LikeDislikeButton.TYPES.LIKE)}
           aria-label="Like Button"
         >
           <FiThumbsUp />
@@ -39,7 +39,7 @@ export default function LikeDislikeButton({
           className={`flex items-center space-x-2 border border-danger px-5 py-2 rounded-md ${
             isDisliked ? dislikeActiveClass : dislikeInactiveClass
           }`}
-          onClick={() => onClickButton(LikeDislikeButton.TYPES.DISLIKE)}
+          onClick={() => onClickButton(id, LikeDislikeButton.TYPES.DISLIKE)}
           aria-label="Dislike Button"
         >
           <FiThumbsDown />
@@ -51,6 +51,8 @@ export default function LikeDislikeButton({
 }
 
 LikeDislikeButton.TYPES = {
-  LIKE: "LIKE",
-  DISLIKE: "DISLIKE",
+  LIKE: "like",
+  DISLIKE: "dislike",
+  UNLIKE: "unlike",
+  UNDISLIKE: "undislike",
 };
