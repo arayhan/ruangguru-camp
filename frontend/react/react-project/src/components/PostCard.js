@@ -1,21 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Button from "./LikeDislikeButton";
+import axios from "axios";
+import { SessionContext } from "../context/SessionContext";
+import { API_URL } from "../api/config";
 
 export default function PostCard({ image, caption, username, userId, date }) {
+  const { session } = useContext(SessionContext);
+
   const [isLiked, setIsLiked] = useState(true);
   const [likeCount, setLikeCount] = useState(456);
   const [dislikeCount, setDislikeCount] = useState(678);
 
-  const handleClickLikeDislikeButton = (likeType) => {
-    if (!isLiked && likeType === "LIKE") {
-      setIsLiked(true);
-      setLikeCount(likeCount + 1);
-      setDislikeCount(dislikeCount - 1);
-    } else if (isLiked && likeType === "DISLIKE") {
-      setIsLiked(false);
-      setLikeCount(likeCount - 1);
-      setDislikeCount(dislikeCount + 1);
-    }
+  const handleClickLikeDislikeButton = async (postId, likeType) => {
+    const res = await axios.post(`${API_URL}/${postId}/${likeType}`);
+    console.log({ res });
   };
 
   return (
