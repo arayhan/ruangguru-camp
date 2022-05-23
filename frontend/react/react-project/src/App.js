@@ -1,8 +1,9 @@
-import "./App.css"
-// TODO: answer here
-
 function App() {
-  // TODO: answer here
+	return (
+		<div aria-label="App">
+			<div aria-label="App Title">Instagram Clone</div>
+		</div>
+	);
 }
 
-export default App
+export default App;
