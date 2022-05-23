@@ -6,7 +6,8 @@ import { SessionContext } from '../context/SessionContext';
 import Logo from '../images/instagram-logo.png';
 
 export default function Navbar() {
-  const { session, setSession } = useContext(SessionContext);
+  const session = useContext(SessionContext).session;
+  const setSession = useContext(SessionContext).setSession;
 
   const handleLogin = () => auth();
 
@@ -16,6 +17,7 @@ export default function Navbar() {
   }, [setSession]);
 
   useEffect(() => {
+    console.log({ session });
     if (!session) handleGetSession();
   }, [session, handleGetSession]);
 
@@ -29,7 +31,7 @@ export default function Navbar() {
                 <img className="w-6" src={Logo} alt="Instagram Logo" aria-label="App Logo" />
               </div>
               <div className="font-logo text-xl font-semibold" aria-label="App Title">
-                Instagram Clone
+                Ahmed Rayhan Primadedas
               </div>
             </Link>
           </div>
