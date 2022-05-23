@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CardImage from '../components/PostCard';
 import { API_URL } from '../api/config';
@@ -7,17 +7,17 @@ import { API_URL } from '../api/config';
 function PostList() {
   const [posts, setPosts] = useState(null);
 
-  const getPosts = useCallback(async () => {
-    const res = await axios.get(`${API_URL}/post/list`, {
-      withCredentials: true,
-    });
-
-    setPosts(res.data.data);
-  }, []);
-
   useEffect(() => {
+    const getPosts = async () => {
+      const res = await axios.get(`${API_URL}/post/list`, {
+        withCredentials: true,
+      });
+
+      setPosts(res.data.data);
+    };
+
     getPosts();
-  }, [getPosts]);
+  }, [setPosts]);
 
   return (
     <div>
@@ -27,6 +27,7 @@ function PostList() {
             posts?.map(
               ({ id, title, author, content, image, likeCount, liked, dislikeCount, disliked, createdAt }) => (
                 <CardImage
+                  key={id}
                   postId={id}
                   title={title}
                   username={author.name}

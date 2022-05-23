@@ -1,6 +1,5 @@
-import { useEffect, useContext, useCallback } from 'react';
+import { useEffect, useContext } from 'react';
 import { FiLogIn } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
 import { getSession, auth } from '../api/auth';
 import { SessionContext } from '../context/SessionContext';
 import Logo from '../images/instagram-logo.png';
@@ -11,29 +10,27 @@ export default function Navbar() {
 
   const handleLogin = () => auth();
 
-  const handleGetSession = useCallback(async () => {
-    const session = await getSession();
-    setSession(session.data);
-  }, [setSession]);
-
   useEffect(() => {
-    console.log({ session });
-    if (!session) handleGetSession();
-  }, [session, handleGetSession]);
+    const handleGetSession = () => {
+      getSession()
+        .then((session) => setSession(session?.data))
+        .catch((err) => console.log({ err }));
+    };
+
+    handleGetSession();
+  }, [session, setSession]);
 
   return (
     <div className="shadow-md bg-white" aria-label="Navbar">
       <div className="container">
         <div className="flex items-center justify-between">
           <div className="py-5">
-            <Link className="inline-flex items-center space-x-3" to="/">
+            <a href="/" className="inline-flex items-center space-x-3" aria-label="App Title">
               <div>
                 <img className="w-6" src={Logo} alt="Instagram Logo" aria-label="App Logo" />
               </div>
-              <div className="font-logo text-xl font-semibold" aria-label="App Title">
-                Ahmed Rayhan Primadedas
-              </div>
-            </Link>
+              <div className="font-logo text-xl font-semibold">Ahmed Rayhan Primadedas</div>
+            </a>
           </div>
 
           <div>
