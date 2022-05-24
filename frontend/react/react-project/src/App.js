@@ -2,18 +2,19 @@
 import { SessionProvider } from './context/SessionContext';
 import Navbar from './components/Navbar';
 import PostList from './routes/PostList';
-// import UploadForm from './components/UploadForm';
+import UploadForm from './components/UploadForm';
 
 function App() {
   return (
     <SessionProvider>
       <div aria-label="App">
         <Navbar />
+        <UploadForm />
         <PostList />
         {/* <Routes>
         <Route index element={} />
         <Route index path="/" element={} />
-        <Route path="upload" element={<UploadForm />} />
+        <Route path="upload" element={} />
         </Routes> */}
       </div>
     </SessionProvider>
