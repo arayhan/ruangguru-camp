@@ -45,7 +45,7 @@ export default function LikeDislikeButton({ postId, isLiked, isDisliked, likeCou
       }
     }
 
-    // postLikeDislike(postId, { type }, () => handleGetPosts());
+    postLikeDislike(postId, { type }, () => handleGetPosts());
   };
 
   return (
