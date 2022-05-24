@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi';
 import { postLikeDislike } from '../api/post';
-import { usePost } from '../context/PostContext';
 
 export default function LikeDislikeButton({ postId, isLiked, isDisliked, likeCount, dislikeCount }) {
-  const handleGetPosts = usePost().handleGetPosts;
-
   const [likeCountState, setLikeCountState] = useState(likeCount);
   const [dislikeCountState, setDislikeCountState] = useState(dislikeCount);
   const [isLikedState, setIsLikedState] = useState(isLiked);
@@ -45,7 +42,7 @@ export default function LikeDislikeButton({ postId, isLiked, isDisliked, likeCou
       }
     }
 
-    postLikeDislike(postId, { type }, () => handleGetPosts());
+    postLikeDislike(postId, { type });
   };
 
   return (

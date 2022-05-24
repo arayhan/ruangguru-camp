@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useContext, useCallback } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import { getPosts } from '../api/post';
 
 const PostContext = createContext({
@@ -6,17 +6,19 @@ const PostContext = createContext({
   handleGetPosts: null,
 });
 
-const PostProvider = ({ isLoggedIn, children }) => {
+const PostProvider = ({ children }) => {
   const [posts, setPosts] = useState(null);
 
-  const handleGetPosts = useCallback(() => {
-    console.log('test');
-    if (isLoggedIn) getPosts((response) => setPosts(response));
-  }, [isLoggedIn]);
+  useEffect(() => {
+    const handleGetPosts = async () => {
+      const response = await getPosts();
+      setPosts(response);
+    };
 
-  useEffect(() => handleGetPosts(), [handleGetPosts]);
+    handleGetPosts();
+  }, []);
 
-  return <PostContext.Provider value={{ posts, handleGetPosts }}>{children}</PostContext.Provider>;
+  return <PostContext.Provider value={{ posts }}>{children}</PostContext.Provider>;
 };
 
 const usePost = () => useContext(PostContext);
