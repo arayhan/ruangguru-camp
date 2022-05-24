@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { getSession, auth } from '../api/auth';
 import { SessionContext } from '../context/SessionContext';
@@ -8,7 +8,10 @@ export default function Navbar() {
   const session = useContext(SessionContext).session;
   const setSession = useContext(SessionContext).setSession;
 
+  const [showDropdown, setShowDropdown] = useState(false);
+
   const handleLogin = () => auth();
+  const handleLogout = () => setSession(null);
 
   useEffect(() => {
     const handleGetSession = () => {
@@ -18,7 +21,22 @@ export default function Navbar() {
     };
 
     handleGetSession();
-  }, [session, setSession]);
+  }, [setSession]);
+
+  // useEffect(() => {
+  //   const handleLogout = () => {
+  //     setSession(null);
+  //   };
+
+  //   return handleLogout;
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log({ session });
+  //   if (!session && Object.keys(session).length === 0) {
+  //     handleLogin();
+  //   }
+  // }, [session]);
 
   return (
     <div className="shadow-md bg-white" aria-label="Navbar">
@@ -29,20 +47,39 @@ export default function Navbar() {
               <div>
                 <img className="w-6" src={Logo} alt="Instagram Logo" aria-label="App Logo" />
               </div>
-              <div className="font-logo text-xl font-semibold">Ahmed Rayhan Primadedas</div>
+              <div className="font-logo text-xl font-semibold">Instagram Clone</div>
             </a>
           </div>
 
           <div>
             {session && (
-              <div className="flex items-center space-x-3" aria-label="Profile">
-                <img className="w-10 rounded-full" src={session.user.image} alt="User Profile" />
-                <div>
-                  <div>{session.user.name}</div>
-                  <div className="text-xs">{session.user.email}</div>
-                </div>
+              <div className="relative">
+                <button
+                  className="flex items-center space-x-3 hover:bg-gray-100 py-3 px-5 rounded-md"
+                  onClick={() => setShowDropdown(!showDropdown)}
+                  aria-label="Profile"
+                >
+                  <img className="w-10 rounded-full" src={session.user.image} alt="User Profile" />
+                  <div className="text-left">
+                    <div>{session.user.name}</div>
+                    <div className="text-xs">{session.user.email}</div>
+                  </div>
+                </button>
+
+                {showDropdown && (
+                  <div className="absolute z-10 left-0 bg-white w-full rounded-sm shadow-md border">
+                    <button
+                      className="text-sm p-3 text-left hover:bg-gray-100 w-full"
+                      aria-label="Logout"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
               </div>
             )}
+
             {!session && (
               <button
                 className="flex items-center space-x-2 bg-primary rounded-md px-6 py-3 text-white transition hover:bg-primary-600"
