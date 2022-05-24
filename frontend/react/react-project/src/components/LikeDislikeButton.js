@@ -48,15 +48,6 @@ export default function LikeDislikeButton({ postId, isLiked, isDisliked, likeCou
     // postLikeDislike(postId, { type }, () => handleGetPosts());
   };
 
-  useEffect(() => {
-    console.log({
-      likeCountState,
-      dislikeCountState,
-      isLikedState,
-      isDislikedState,
-    });
-  }, [likeCountState, dislikeCountState, isLikedState, isDislikedState]);
-
   return (
     <div className="flex items-center justify-end space-x-3">
       <div className="flex items-center space-x-2">
