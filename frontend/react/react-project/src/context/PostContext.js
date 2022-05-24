@@ -6,13 +6,13 @@ const PostContext = createContext({
   handleGetPosts: null,
 });
 
-const PostProvider = ({ session, children }) => {
+const PostProvider = ({ isLoggedIn, children }) => {
   const [posts, setPosts] = useState(null);
 
   const handleGetPosts = useCallback(() => {
     console.log('test');
-    if (session) getPosts((response) => setPosts(response));
-  }, [session]);
+    if (isLoggedIn) getPosts((response) => setPosts(response));
+  }, [isLoggedIn]);
 
   useEffect(() => handleGetPosts(), [handleGetPosts]);
 
