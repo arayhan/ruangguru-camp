@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { getSession, auth } from '../api/auth';
 import { useSession } from '../context/SessionContext';
@@ -7,7 +7,6 @@ import Logo from '../images/instagram-logo.png';
 export default function Navbar() {
   const user = useSession().user;
   const setUser = useSession().setUser;
-  const isLoggedIn = useSession().isLoggedIn;
   const setIsLoggedIn = useSession().setIsLoggedIn;
 
   const [showDropdown, setShowDropdown] = useState(false);
@@ -47,34 +46,33 @@ export default function Navbar() {
             </a>
           </div>
 
-          <div aria-label="Profile">
-            <div>{user?.name}</div>
-            {user && (
-              <div className="relative">
-                <button
-                  className="flex items-center space-x-3 hover:bg-gray-100 py-3 px-5 rounded-md"
-                  onClick={() => setShowDropdown(!showDropdown)}
-                >
-                  <img className="w-10 rounded-full" src={user.image} alt="User Profile" />
-                  <div className="text-left">
-                    <div>{user.name}</div>
-                    <div className="text-xs">{user.email}</div>
-                  </div>
-                </button>
+          <div>
+            {/* {user && ( */}
+            <div className="relative" aria-label="Profile">
+              <button
+                className="flex items-center space-x-3 hover:bg-gray-100 py-3 px-5 rounded-md"
+                onClick={() => setShowDropdown(!showDropdown)}
+              >
+                <img className="w-10 rounded-full" src={user?.image} alt="User Profile" />
+                <div className="text-left">
+                  <div>{user?.name} - John Doe</div>
+                  <div className="text-xs">{user?.email}</div>
+                </div>
+              </button>
 
-                {showDropdown && (
-                  <div className="absolute z-10 left-0 bg-white w-full rounded-sm shadow-md border">
-                    <button
-                      className="text-sm p-3 text-left hover:bg-gray-100 w-full"
-                      aria-label="Logout"
-                      onClick={handleAuth}
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
+              {showDropdown && (
+                <div className="absolute z-10 left-0 bg-white w-full rounded-sm shadow-md border">
+                  <button
+                    className="text-sm p-3 text-left hover:bg-gray-100 w-full"
+                    aria-label="Logout"
+                    onClick={handleAuth}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+            {/* )} */}
 
             {!user && (
               <button
