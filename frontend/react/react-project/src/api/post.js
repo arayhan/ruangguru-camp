@@ -1,14 +1,11 @@
 import axios from 'axios';
 import { API_URL } from './config';
 
-const http = axios.create({
-  baseURL: API_URL,
-  withCredentials: true,
-});
-
 const getPosts = (callback) => {
-  http
-    .get('post/list')
+  const config = { withCredentials: true };
+
+  axios
+    .get(API_URL + '/post/list', config)
     .then((response) => {
       callback(response.data.data);
     })
@@ -19,8 +16,10 @@ const getPosts = (callback) => {
 
 const postLikeDislike = (id, data, callback) => {
   const { type } = data;
-  http
-    .post(`post/${id}/${type}`)
+  const config = { withCredentials: true };
+
+  axios
+    .post(API_URL + `/post/${id}/${type}`, null, config)
     .then((response) => {
       callback(response.data);
     })
