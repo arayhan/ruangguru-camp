@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import { AiFillWarning } from 'react-icons/ai';
 import CardImage from '../components/PostCard';
-import { API_URL } from '../api/config';
+import { getPosts } from '../api/post';
 import { SessionContext } from '../context/SessionContext';
 
 function PostList() {
@@ -11,14 +10,7 @@ function PostList() {
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
-    const getPosts = async () => {
-      const config = { withCredentials: true };
-      const res = await axios.get(`${API_URL}/post/list`, config);
-
-      setPosts(res.data.data);
-    };
-
-    if (session) getPosts();
+    if (session) getPosts((response) => setPosts(response));
   }, [session, setPosts]);
 
   return (
