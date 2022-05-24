@@ -1,8 +1,8 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
-export const SessionContext = createContext({ session: null });
+const SessionContext = createContext({ session: null });
 
-export const SessionProvider = ({ children }) => {
+const SessionProvider = ({ children }) => {
   const [session, setSession] = useState(null);
 
   return (
@@ -11,3 +11,7 @@ export const SessionProvider = ({ children }) => {
     </SessionContext.Provider>
   );
 };
+
+const useSession = () => useContext(SessionContext);
+
+export { SessionContext, SessionProvider, useSession };

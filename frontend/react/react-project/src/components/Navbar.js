@@ -1,42 +1,24 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { getSession, auth } from '../api/auth';
-import { SessionContext } from '../context/SessionContext';
+import { useSession } from '../context/SessionContext';
 import Logo from '../images/instagram-logo.png';
 
 export default function Navbar() {
-  const session = useContext(SessionContext).session;
-  const setSession = useContext(SessionContext).setSession;
+  const { session, setSession } = useSession();
 
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleLogin = () => auth();
   const handleLogout = () => setSession(null);
 
-  useEffect(() => {
-    const handleGetSession = () => {
-      getSession()
-        .then((session) => setSession(session?.data))
-        .catch((err) => console.log({ err }));
-    };
-
-    handleGetSession();
+  const handleGetSession = useCallback(() => {
+    getSession()
+      .then((session) => setSession(session?.data))
+      .catch((err) => console.log({ err }));
   }, [setSession]);
 
-  // useEffect(() => {
-  //   const handleLogout = () => {
-  //     setSession(null);
-  //   };
-
-  //   return handleLogout;
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log({ session });
-  //   if (!session && Object.keys(session).length === 0) {
-  //     handleLogin();
-  //   }
-  // }, [session]);
+  useEffect(() => handleGetSession(), [handleGetSession]);
 
   return (
     <div className="shadow-md bg-white" aria-label="Navbar">

@@ -1,7 +1,4 @@
-import axios from 'axios';
-import moment from 'moment';
 import Button from './LikeDislikeButton';
-import { API_URL } from '../api/config';
 
 export default function PostCard({
   postId,
@@ -14,11 +11,6 @@ export default function PostCard({
   dislikeCount,
   disliked,
 }) {
-  const handleClickLikeDislikeButton = async (likeType) => {
-    const res = await axios.post(`${API_URL}/${postId}/${likeType}`);
-    console.log({ res });
-  };
-
   return (
     <div
       className="flex flex-col group bg-white rounded-md overflow-hidden shadow-md cursor-pointer"
@@ -36,7 +28,7 @@ export default function PostCard({
       <div className="flex flex-1 flex-col justify-between p-3 space-y-6">
         <div className="flex-1">
           <div className="flex text-xs space-x-2">
-            <div aria-label="Post Date">{moment(date).format('DD MMMM yyyy')}</div>
+            <div aria-label="Post Date">{date}</div>
           </div>
           <div className="" aria-label="Post Caption">
             {caption}
@@ -47,11 +39,11 @@ export default function PostCard({
             {username}
           </div>
           <Button
+            postId={postId}
             likeCount={likeCount}
             dislikeCount={dislikeCount}
             isLiked={liked}
             isDisliked={disliked}
-            onClickButton={handleClickLikeDislikeButton}
           />
         </div>
       </div>

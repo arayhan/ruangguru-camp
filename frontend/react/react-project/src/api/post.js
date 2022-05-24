@@ -17,4 +17,16 @@ const getPosts = (callback) => {
     });
 };
 
-export { getPosts };
+const postLikeDislike = (id, data, callback) => {
+  const { type } = data;
+  http
+    .post(`post/${id}/${type}`)
+    .then((response) => {
+      callback(response.data);
+    })
+    .catch((error) => {
+      console.log('getPosts Err : ', error);
+    });
+};
+
+export { getPosts, postLikeDislike };
