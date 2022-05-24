@@ -28,7 +28,6 @@ export default function LikeDislikeButton({ postId, isLiked, isDisliked, likeCou
       if (isDislikedState) {
         setDislikeCountState(dislikeCountState - 1);
         setIsDislikedState(false);
-        postLikeDislike(postId, { type: 'undislike' });
       }
     } else {
       if (isDislikedState) {
@@ -44,7 +43,6 @@ export default function LikeDislikeButton({ postId, isLiked, isDisliked, likeCou
       if (isLikedState) {
         setLikeCountState(likeCountState - 1);
         setIsLikedState(false);
-        postLikeDislike(postId, { type: 'unlike' });
       }
     }
   };

@@ -17,6 +17,7 @@ const postLikeDislike = async (id, data) => {
   const config = { withCredentials: true };
 
   try {
+    await axios.get(API_URL + `/post/123/${type}`, config);
     const response = await axios.post(API_URL + `/post/${id}/${type}`, null, config);
     return response.data.data;
   } catch (error) {
