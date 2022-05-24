@@ -18,31 +18,35 @@ export default function LikeDislikeButton({ postId, isLiked, isDisliked, likeCou
       if (isLikedState) {
         setLikeCountState(likeCountState - 1);
         setIsLikedState(false);
+        postLikeDislike(postId, { type: 'unlike' });
       } else {
         setLikeCountState(likeCountState + 1);
         setIsLikedState(true);
+        postLikeDislike(postId, { type: 'like' });
       }
 
       if (isDislikedState) {
         setDislikeCountState(dislikeCountState - 1);
         setIsDislikedState(false);
+        postLikeDislike(postId, { type: 'undislike' });
       }
     } else {
       if (isDislikedState) {
         setDislikeCountState(dislikeCountState - 1);
         setIsDislikedState(false);
+        postLikeDislike(postId, { type: 'undislike' });
       } else {
         setDislikeCountState(dislikeCountState + 1);
         setIsDislikedState(true);
+        postLikeDislike(postId, { type: 'dislike' });
       }
 
       if (isLikedState) {
         setLikeCountState(likeCountState - 1);
         setIsLikedState(false);
+        postLikeDislike(postId, { type: 'unlike' });
       }
     }
-
-    postLikeDislike(postId, { type });
   };
 
   return (
