@@ -1,6 +1,9 @@
 import { createContext, useContext, useState } from 'react';
 
-const SessionContext = createContext({ session: null });
+const SessionContext = createContext({
+  session: null,
+  setSession: null,
+});
 
 const SessionProvider = ({ children }) => {
   const [session, setSession] = useState(null);
