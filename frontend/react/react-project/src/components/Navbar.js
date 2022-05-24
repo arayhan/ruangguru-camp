@@ -12,19 +12,27 @@ export default function Navbar() {
 
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const handleLogin = () => auth();
-  const handleLogout = () => setUser(null);
+  const handleAuth = () => auth();
 
-  const handleGetSession = useCallback(() => {
-    getSession()
-      .then((session) => {
-        setUser(session.data.user);
-        setIsLoggedIn(true);
-      })
-      .catch((err) => console.log({ err }));
+  useEffect(() => {
+    const handleGetSession = async () => {
+      try {
+        const response = await getSession();
+
+        if (Object.values(response.data).length > 0) {
+          setUser(response.data.user);
+          setIsLoggedIn(true);
+        } else {
+          setUser(null);
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.log({ error });
+      }
+    };
+
+    handleGetSession();
   }, [setUser, setIsLoggedIn]);
-
-  useEffect(() => handleGetSession(), [handleGetSession]);
 
   return (
     <div className="shadow-md bg-white" aria-label="Navbar">
@@ -39,13 +47,13 @@ export default function Navbar() {
             </a>
           </div>
 
-          <div>
-            {isLoggedIn && (
+          <div aria-label="Profile">
+            <div>{user?.name}</div>
+            {user && (
               <div className="relative">
                 <button
                   className="flex items-center space-x-3 hover:bg-gray-100 py-3 px-5 rounded-md"
                   onClick={() => setShowDropdown(!showDropdown)}
-                  aria-label="Profile"
                 >
                   <img className="w-10 rounded-full" src={user.image} alt="User Profile" />
                   <div className="text-left">
@@ -59,7 +67,7 @@ export default function Navbar() {
                     <button
                       className="text-sm p-3 text-left hover:bg-gray-100 w-full"
                       aria-label="Logout"
-                      onClick={handleLogout}
+                      onClick={handleAuth}
                     >
                       Logout
                     </button>
@@ -68,10 +76,10 @@ export default function Navbar() {
               </div>
             )}
 
-            {!isLoggedIn && (
+            {!user && (
               <button
                 className="flex items-center space-x-2 bg-primary rounded-md px-6 py-3 text-white transition hover:bg-primary-600"
-                onClick={handleLogin}
+                onClick={handleAuth}
                 aria-label="Login"
               >
                 <div>Login</div>
