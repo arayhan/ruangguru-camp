@@ -8,7 +8,10 @@ const SessionContext = createContext({
 });
 
 const SessionProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    name: 'John Doe',
+    image: 'https://example.org/abc.png',
+  });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
