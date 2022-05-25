@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { API_URL } from '../api/config';
-import PostCard from '../components/PostCard';
 import moment from 'moment';
 
 function PostDetail() {
@@ -11,12 +10,17 @@ function PostDetail() {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    try {
-      const response = axios.get(`${API_URL}/post/${postID}/detail`);
-      setPost(response.data.data);
-    } catch (error) {
-      console.log({ error });
-    }
+    const getPostDetail = async () => {
+      try {
+        const config = { withCredentials: true };
+        const response = await axios.get(`${API_URL}/post/${postID}/detail`, config);
+        setPost(response.data.data);
+      } catch (error) {
+        console.log({ error });
+      }
+    };
+
+    getPostDetail();
   }, [postID]);
 
   return (
@@ -24,17 +28,23 @@ function PostDetail() {
       {!post && <div className="text-center">Loading...</div>}
       {post && (
         <div>
-          <PostCard
-            postId={post.id}
-            username={post.author.name}
-            caption={post.content}
-            date={moment(post.createdAt).format('DD MMMM yyyy')}
-            image={post.image}
-            likeCount={post.likeCount}
-            liked={post.liked}
-            dislikeCount={post.dislikeCount}
-            disliked={post.disliked}
-          />
+          <div className="flex flex-col group bg-white rounded-md overflow-hidden shadow-md">
+            <div>
+              <img className="w-full h-full" src={post.image} alt="" />
+            </div>
+
+            <div className="grid grid-cols-2 gap-5 p-5">
+              <div className="font-semibold border-r">Date</div>
+              <div>{moment(post.createdAt).format('DD MMMM yyyy')}</div>
+              <div className="font-semibold border-r">Author</div>
+              <Link className="text-primary underline" to={`/profile/${post.author.id}`}>
+                {post.author.name}
+              </Link>
+            </div>
+
+            <hr />
+            <div className="p-3">{post.content}</div>
+          </div>
         </div>
       )}
     </div>

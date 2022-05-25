@@ -1,16 +1,7 @@
+import { Link } from 'react-router-dom';
 import Button from './LikeDislikeButton';
 
-export default function PostCard({
-  postId,
-  username,
-  caption,
-  date,
-  image,
-  likeCount,
-  liked,
-  dislikeCount,
-  disliked,
-}) {
+function PostCard({ postId, username, caption, date, image, likeCount, liked, dislikeCount, disliked }) {
   return (
     <div
       className="flex flex-col group bg-white rounded-md overflow-hidden shadow-md cursor-pointer"
@@ -47,6 +38,19 @@ export default function PostCard({
           />
         </div>
       </div>
+
+      <hr />
+
+      <div className="block p-3">
+        <Link
+          className="inline-block px-3 py-2 rounded-md w-full text-center bg-primary text-white hover:bg-primary-600 transition-all"
+          to={`/post/${postId}`}
+        >
+          Show Detail
+        </Link>
+      </div>
     </div>
   );
 }
+
+export default PostCard;
