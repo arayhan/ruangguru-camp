@@ -15,7 +15,7 @@ function App() {
           <PostContext.Consumer>
             {({ posts, setPosts }) => (
               <>
-                <UploadForm onSubmit={(post) => setPosts([...posts, post])} />
+                <UploadForm onSubmit={(post) => setPosts([...posts])} />
                 <PostList />
               </>
             )}

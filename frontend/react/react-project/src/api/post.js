@@ -12,6 +12,17 @@ const getPosts = async () => {
   }
 };
 
+const getPostsDetail = async (postId) => {
+  const config = { withCredentials: true };
+
+  try {
+    const response = await axios.get(API_URL + '/post/' + postId + '/detail', config);
+    return response.data.data;
+  } catch (error) {
+    console.log('getPosts Error : ', { error });
+  }
+};
+
 const postLikeDislike = async (id, data) => {
   const { type } = data;
   const config = { withCredentials: true };
@@ -36,4 +47,4 @@ const submitPost = async (formData) => {
   }
 };
 
-export { getPosts, postLikeDislike, submitPost };
+export { getPosts, getPostsDetail, postLikeDislike, submitPost };
