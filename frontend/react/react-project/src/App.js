@@ -1,7 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import { SessionProvider } from './context/SessionContext';
 import Navbar from './components/Navbar';
-import Home from './routes/Home';
+import PostList from './routes/PostList';
+import PostDetail from './routes/PostDetail';
+import Profile from './routes/Profile';
 
 function App() {
   return (
@@ -10,8 +12,9 @@ function App() {
         <Navbar />
 
         <Routes>
-          <Route index path="/" element={<Home />} />
-          <Route path="/profile" element={<Home />} />
+          <Route index path="/" element={<PostList />} />
+          <Route path="/post/:postID" element={<PostDetail />} />
+          <Route path="/profile/:userID" element={<Profile />} />
         </Routes>
       </div>
     </SessionProvider>
