@@ -3,7 +3,7 @@ import { getPosts } from '../api/post';
 
 const PostContext = createContext({
   posts: null,
-  handleGetPosts: null,
+  setPosts: () => {},
 });
 
 const PostProvider = ({ children }) => {
@@ -18,7 +18,7 @@ const PostProvider = ({ children }) => {
     handleGetPosts();
   }, []);
 
-  return <PostContext.Provider value={{ posts }}>{children}</PostContext.Provider>;
+  return <PostContext.Provider value={{ posts, setPosts }}>{children}</PostContext.Provider>;
 };
 
 const usePost = () => useContext(PostContext);

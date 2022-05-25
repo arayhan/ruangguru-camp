@@ -1,5 +1,6 @@
 // import { Routes, Route } from 'react-router-dom';
 import { SessionProvider } from './context/SessionContext';
+import { PostContext, PostProvider } from './context/PostContext';
 import Navbar from './components/Navbar';
 import PostList from './routes/PostList';
 import UploadForm from './components/UploadForm';
@@ -9,8 +10,17 @@ function App() {
     <SessionProvider>
       <div aria-label="App">
         <Navbar />
-        <UploadForm />
-        <PostList />
+
+        <PostProvider>
+          <PostContext.Consumer>
+            {({ posts, setPosts }) => (
+              <>
+                <UploadForm onSubmit={(post) => setPosts([...posts, post])} />
+                <PostList />
+              </>
+            )}
+          </PostContext.Consumer>
+        </PostProvider>
         {/* <Routes>
         <Route index element={} />
         <Route index path="/" element={} />
